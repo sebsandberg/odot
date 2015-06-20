@@ -21,7 +21,6 @@ describe "Editing todo lists" do
 	it "updates a todo list successfully with correct information" do
 		visit "/todo_lists"
 
-
 		update_todo_list todo_list: todo_list,
 						 title:"New title",
 						 description:"New description"
@@ -52,9 +51,5 @@ describe "Editing todo lists" do
 		update_todo_list todo_list: todo_list, description:"hi"
 		expect(page).to have_content("error")
 	end
-	
-	
-
-
 
 end
