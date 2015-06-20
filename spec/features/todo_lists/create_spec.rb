@@ -12,6 +12,7 @@ describe "Creating todo lists" do
 		fill_in"Title", with: options[:title]
 		fill_in"Description", with: options[:description]
 		click_button "Create Todo list"
+	end
 
 	it "redirects to the todo lists index page on success" do
 		create_todo_list
@@ -47,15 +48,6 @@ describe "Creating todo lists" do
 		
 		create_todo_list title:"Grocery list", description:""
 
-		visit "/todo_lists"
-		click_link "New Todo list"
-		expect(page).to have_content("New todo_list")
-
-		fill_in"Title", with: "Grocery list"
-		fill_in"Description", with: ""
-		click_button "Create Todo list"
-
-
 		expect(page).to have_content("error")
 		expect(TodoList.count).to eq(0)
 
@@ -65,14 +57,8 @@ describe "Creating todo lists" do
 
 	it "displays an error when the todo list has a description less than 5 characters" do
 		expect(TodoList.count).to eq(0)
-		visit "/todo_lists"
-		click_link "New Todo list"
-		expect(page).to have_content("New todo_list")
 
-		fill_in"Title", with: "Hi"
-		fill_in"Description", with: "1234"
-		click_button "Create Todo list"
-
+		create_todo_list description:"1234"
 
 		expect(page).to have_content("error")
 		expect(TodoList.count).to eq(0)
